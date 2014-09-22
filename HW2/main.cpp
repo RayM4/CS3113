@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = false; 
-			}
+			} 
 
 			processEvent(enti, elapsed, score1,score2);
 		}
