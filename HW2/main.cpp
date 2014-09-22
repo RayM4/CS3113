@@ -26,10 +26,7 @@ void setup() {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void processEvent(Entity** arr, float* lastFrameTicks, float* elapsed, int* score1, int* score2) {
-	float ticks = (float)SDL_GetTicks() / 1000.0f;
-	*elapsed = ticks - *lastFrameTicks;
-	*lastFrameTicks = ticks;
+void processEvent(Entity** arr, float* elapsed, int* score1, int* score2) {
 
 	//Ball movement
 	if (arr[4]->getX() > 0.85 || arr[4]->getX() < -0.85 ) {
@@ -95,10 +92,13 @@ int main(int argc, char *argv[]) {
 
 	bool done = true;
 
-	float *lastFrameTicks = new float(0.0f);
+	float lastFrameTicks = 0.0f;
 	float *elapsed = new float(0.0f);
 	int* score1 = new int(0);
 	int* score2 = new int(0);
+	float ticks = (float)SDL_GetTicks() / 1000.0f;
+	*elapsed = ticks - lastFrameTicks;
+	lastFrameTicks = ticks;
 
 	//creating entities
 	Entity *topWall = new Entity(0.0f,1.0f,2.66f,0.2f, "wall.png");
@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
 	Entity *ball = new Entity(0.0f,0.0f,0.1f,0.1f, "ball_v.png");
 	ball->setDirX(-0.5f);
 	ball->setDirY(0.2f);
-	ball->setSpeed(0.8f);
+	ball->setSpeed(0.4f);
 	left->setSpeed(0.6f);
 	right->setSpeed(0.6f);
 
@@ -117,71 +117,29 @@ int main(int argc, char *argv[]) {
 	Entity* enti[5] = { topWall, botWall, left, right, ball };
 
 	while (done) {
+
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = false; 
 			}
 
-			//float ticks = (float)SDL_GetTicks() / 1000.0f;
-			//float elapsed = ticks - lastFrameTicks;
-			//lastFrameTicks = ticks;
-
-			////Ball movement
-			//if (ball->getX() > 0.85 || ball->getX() < -0.85 ) {
-			//	ball->setTexture("ball_v.png");
-			//	ball->setX(0.0f);
-			//	ball->setY(0.0f);
-			//	ball->setDirX(-0.5f);
-			//	ball->setDirY(0.2f);
-			//}
-
-			//ball->setX( ball->getX() + (elapsed * ball->getDirectionX() * ball->getSpeed() ));
-			//ball->setY( ball->getY() + (elapsed * ball->getDirectionY() * ball->getSpeed() ));
-			//
-			//if( ball->getY() > 0.8 || ball->getY() < -0.8 ) {
-			//	ball->reverseY();
-			//}
-
-			//if ( (ball->getX() < left->getX() + 0.2f) && (ball->getY() < (left->getY() + 0.2f)) && (ball->getY() > (left->getY() - 0.2f)) ) {
-			//	ball->reverseX();
-			//}
-			//if ( (ball->getX() > right->getX() - 0.2f) && (ball->getY() < (right->getY() + 0.2f)) && (ball->getY() > (right->getY() - 0.2f)) ) {
-			//	ball->reverseX();
-			//}
-
-			//if (ball->getX() > 0.85 || ball->getX() < -0.85 ) {
-			//	ball->setTexture("explode.png");
-			//}
-			//
-			////Player Input
-
-			//if(keys[SDL_SCANCODE_DOWN] && (right->getY() - elapsed > -0.8)) {
-			//	right->setY( right->getY() - elapsed );
-			//} else if(keys[SDL_SCANCODE_UP] && ((right->getY() + elapsed) < 0.8)) {
-			//	right->setY( (right->getY() + elapsed) );
-			//} else if(keys[SDL_SCANCODE_W] && ((left->getY() + elapsed) < 0.8)) {
-			//	left->setY( (left->getY() + elapsed) );
-			//} else if(keys[SDL_SCANCODE_S] && (left->getY() - elapsed > -0.8)) {
-			//	left->setY( left->getY() - elapsed );
-			//}
-
-			processEvent(enti, lastFrameTicks, elapsed, score1,score2);
+			processEvent(enti, elapsed, score1,score2);
 		}
 		render(enti, 5);
 
 		if (*score1 > 3) {
 			done = false;
 			glClear(GL_COLOR_BUFFER_BIT);
-			right->setX(0.0f);
-			right->setY(0.0f);
-			right->draw();
+			left->setX(0.0f);
+			left->setY(0.0f);
+			left->draw();
 			win->draw();
 		} else if (*score2 > 3) {
 			done = false;
 			glClear(GL_COLOR_BUFFER_BIT);
-			left->setX(0.0f);
-			left->setY(0.0f);
-			left->draw();
+			right->setX(0.0f);
+			right->setY(0.0f);
+			right->draw();
 			win->draw();
 		}
 
