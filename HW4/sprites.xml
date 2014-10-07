@@ -1,0 +1,15 @@
+<TextureAtlas imagePath="sprites.png">
+	<SubTexture name="Mega_jumping.png" x="38" y="159" width="34" height="51"/>
+	<SubTexture name="Mega_running_r.png" x="0" y="213" width="35" height="39"/>
+	<SubTexture name="Mega_running_r2.png" x="37" y="213" width="34" height="40"/>
+	<SubTexture name="Mega_shoot_jumping.png" x="0" y="159" width="36" height="52"/>
+	<SubTexture name="Mega_shoot_r.png" x="0" y="75" width="43" height="39"/>
+	<SubTexture name="Mega_shoot_r2.png" x="0" y="33" width="45" height="40"/>
+	<SubTexture name="Mega_shoot_stand.png" x="0" y="116" width="39" height="41"/>
+	<SubTexture name="Mega_standing.png" x="41" y="116" width="34" height="41"/>
+	<SubTexture name="bullet.png" x="45" y="102" width="8" height="6"/>
+	<SubTexture name="met_01.png" x="45" y="75" width="25" height="25"/>
+	<SubTexture name="met_02.png" x="47" y="33" width="22" height="24"/>
+	<SubTexture name="mmx_stage_01.png" x="0" y="0" width="114" height="31"/>
+	<SubTexture name="mmx_stage_02.png" x="77" y="33" width="20" height="125"/>
+</TextureAtlas>
